@@ -1,0 +1,78 @@
+<div style="margin: 10px;">
+    <div nz-row>
+        <div nz-col nzFlex="2">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Post New Employee">
+                <form nz-form [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Employee Name</nz-form-label>
+                        <nz-form-control [nzSpan]="14" nzErrorTip="Please enter employee name">
+                            <input nz-input formControlName="name" placeholder="Enter employee name" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Employee Email</nz-form-label>
+                        <nz-form-control [nzSpan]="14" nzErrorTip="Please enter valid email">
+                            <input nz-input formControlName="email" placeholder="Enter employee email" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Password</nz-form-label>
+                        <nz-form-control [nzSpan]="14" nzErrorTip="Password must be at least 6 characters">
+                            <input nz-input formControlName="password" type="password"
+                                placeholder="Enter employee password" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Assign Project</nz-form-label>
+                        <nz-form-control [nzSpan]="14" nzErrorTip="Please select a project">
+                            <nz-select formControlName="projectId" nzPlaceHolder="Select project">
+                                <nz-option *ngFor="let project of projects" [nzValue]="project.id"
+                                    [nzLabel]="project.name"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                            <button nz-button nzType="primary" [disabled]="employeeForm.invalid">
+                                Add New Employee
+                            </button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </nz-card>
+        </div>
+
+        <!-- Fixed: Employee List - Right Side -->
+        <div nz-col nzFlex="3" style="margin-left: 20px;">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Employee List">
+                <nz-table #employeesTable [nzData]="employees" nzBordered
+                    *ngIf="employees.length > 0; else noEmployees">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let employee of employeesTable.data">
+                            <td>{{ employee.id }}</td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>{{ employee.projectName || 'Not Assigned' }}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+
+                <ng-template #noEmployees>
+                    <nz-empty [nzNotFoundContent]="'No employees found. Create your first employee!'"></nz-empty>
+                </ng-template>
+            </nz-card>
+        </div>
+    </div>
+</div>

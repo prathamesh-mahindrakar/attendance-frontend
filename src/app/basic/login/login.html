@@ -1,0 +1,23 @@
+<div class="center-form">
+    <h2>Enter your credentials</h2>
+
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-label nzFor="email">Email</nz-form-label>
+            <nz-form-control>
+                <input nz-input formControlName="email" id="email" nzErrorTip="Please enter your email"
+                    placeholder="Enter Email" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzFor="password">Password</nz-form-label>
+            <nz-form-control>
+                <input nz-input formControlName="password" id="password" type="password"
+                    nzErrorTip="Please enter your password" placeholder="Enter Password" />
+            </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button nzBlock class="w-100" nzType="primary" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+</div>

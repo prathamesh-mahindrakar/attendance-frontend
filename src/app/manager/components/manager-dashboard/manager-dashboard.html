@@ -1,0 +1,34 @@
+<div style="padding: 30px;">
+    <h3>Mark Today's Attendance</h3>
+
+    <nz-table #baseTable [nzData]="employeeDetails" [nzFrontPagination]="false">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Project Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of baseTable.data">
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.projectName }}</td>
+                <td>{{ employee.email }}</td>
+                <td>
+                    <!-- Add attendance marking controls here -->
+                    <button nz-button nzType="primary"
+                        (click)="markAttendance('PRESENT', employee.id, employee.projectId)">Present</button>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <button nz-button nzType="primary" nzDanger
+                        (click)="markAttendance('ABSENT',employee.id,employee.projectId)">Absent</button>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <button nz-button nzType="default"
+                        (click)="markAttendance('LEAVE',employee.id,employee.projectId)">Leave</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+</div>

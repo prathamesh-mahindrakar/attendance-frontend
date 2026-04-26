@@ -1,0 +1,71 @@
+<div style="margin: 10px;">
+    <div nz-row>
+        <div nz-col nzFlex="2">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Post New Manager">
+                <form nz-form [formGroup]="manageForm" (ngSubmit)="addManager()">
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Manager Name</nz-form-label>
+                        <nz-form-control [nzSpan]="14">
+                            <input nz-input formControlName="name" placeholder="Enter manager name" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Manager Email</nz-form-label>
+                        <nz-form-control [nzSpan]="14">
+                            <input nz-input formControlName="email" placeholder="Enter manager email" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Password</nz-form-label>
+                        <nz-form-control [nzSpan]="14">
+                            <input nz-input formControlName="password" type="password"
+                                placeholder="Enter manager password" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <!-- ✅ REMOVED nzMode="multiple" - now single select -->
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzRequired>Assign Project</nz-form-label>
+                        <nz-form-control [nzSpan]="14">
+                            <nz-select formControlName="projectId" nzPlaceHolder="Select project">
+                                <nz-option *ngFor="let project of projects" [nzValue]="project.id"
+                                    [nzLabel]="project.name"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                            <button nz-button nzType="primary" [disabled]="manageForm.invalid">
+                                Add New Manager
+                            </button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </nz-card>
+        </div>
+
+        <div nz-col nzFlex="3" style="margin-left: 20px;">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Existing Managers">
+                <nz-table [nzData]="managers" [nzFrontPagination]="false">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Assigned Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let manager of managers">
+                            <td>{{ manager.name }}</td>
+                            <td>{{ manager.email }}</td>
+                            <td>{{ manager.projectName }}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </nz-card>
+        </div>
+    </div>
+</div>

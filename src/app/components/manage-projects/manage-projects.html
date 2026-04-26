@@ -1,0 +1,56 @@
+<div style="margin-top: 10px;">
+    <div nz-row>
+        <div nz-col nzFlex="2">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Post New Project">
+                <!-- ✅ ADDED (ngSubmit) here -->
+                <form nz-form [formGroup]="projectForm" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Please input the name !!">
+                            <input type="text" nz-input formControlName="name" placeholder="Project Name" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Please input the duration !!">
+                            <input type="text" nz-input formControlName="duration" placeholder="Project Duration" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Please input the startDate !!">
+                            <nz-date-picker style="width: 100%;" formControlName="startDate"></nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <!-- ✅ ADDED loading state to button -->
+                    <button nz-button nzType="primary" nzBlock class="w-100"
+                        [disabled]="projectForm.invalid || isLoading">
+                        <span *ngIf="isLoading" nz-icon nzType="loading"></span>
+                        {{ isLoading ? 'Creating...' : 'Add New Project' }}
+                    </button>
+                </form>
+            </nz-card>
+        </div>
+        <div nz-col nzFlex="3" style="margin-left: 20px;">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Existing Projects">
+                <nz-table [nzData]="projects" [nzFrontPagination]="false">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Duration</th>
+                            <th>Start Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let project of projects">
+                            <td>{{ project.name }}</td>
+                            <td>{{ project.duration }}</td>
+                            <td>{{ project.startDate | date: 'mediumDate' }}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </nz-card>
+
+        </div>
+    </div>
+</div>
